@@ -9,28 +9,25 @@ import org.openqa.selenium.WebElement;
 import com.test.automation.common.BasePage;
 
 public class ChooseRetailer extends BasePage {
-	
-	
+
 	public static final By MANAGE_RETAIL_BUTTON = By.xpath("//button[@id='manageRetailerBtn']");
 	public static final By SUBMIT_MANAGE_RETAIL_BUTTON = By.xpath("//button[@id='manage-retailer']");
-	
 
 	public ChooseRetailer(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 	}
 
-	public void selectReatailer(String retailer){
-		driver.findElement(MANAGE_RETAIL_BUTTON).click();
+	public void selectReatailer(String retailer) {
+		clickOnElement(MANAGE_RETAIL_BUTTON);
 		List<WebElement> elements = driver.findElements(By.cssSelector(".radio-primary"));
-		for(WebElement we: elements){
+		for (WebElement we : elements) {
 			String label = we.findElement(By.xpath("./label")).getText().trim();
-			if(label.equalsIgnoreCase(retailer)){
+			if (label.equalsIgnoreCase(retailer)) {
 				we.findElement(By.xpath("./input")).click();
 				break;
 			}
 		}
-		driver.findElement(SUBMIT_MANAGE_RETAIL_BUTTON).click();
+		clickOnElement(SUBMIT_MANAGE_RETAIL_BUTTON);
 	}
 
 	@Override

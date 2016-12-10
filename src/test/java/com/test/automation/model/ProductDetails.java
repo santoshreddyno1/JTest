@@ -1,8 +1,8 @@
 package com.test.automation.model;
 
-public class ProductDetails {
+public class ProductDetails extends NewProduct{
 	
-	private String prodName;
+	/*private String prodName;
 	private String prodDesc;
 	private String prodLongDesc;
 	private String barcode;
@@ -81,5 +81,5 @@ public class ProductDetails {
 	}
 	public void setRetailCost(float retailCost) {
 		this.retailCost = retailCost;
-	}
+	}*/
 }

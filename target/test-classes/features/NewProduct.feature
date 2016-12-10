@@ -2,7 +2,7 @@ Feature: Create New Product
 
   Background: 
     Given User log in to Honeycomb Portal
-    And Selected the "Fancy T-Shirt" Retailer
+    And Selected the "980 Sauce" Retailer
     And Clicked on Product catalog
     And Clicked on Add Product
 

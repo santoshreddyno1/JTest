@@ -16,6 +16,8 @@ public class InboundShipmentStepDef {
 	@Autowired
 	private PageUnderTest pageUnderTest;
 	
+	public static String shippingMethod;
+	public static boolean handleInboundShipping;
 	
 @Given("^Clicked on Inbound Shipments$")
 public void clicked_on_Inbound_Shipments()  {
@@ -39,15 +41,23 @@ public void user_fills_all_the_details_on_the_location_tab()  {
 @When("^On the contents tab parcel is selected$")
 public void on_the_contents_tab_parcel_is_selected()  {
 	InboundShipments inboundShipment = pageUnderTest.getInboundShipment();
-	//inboundShipment.selectParcel();
-	inboundShipment.selectPallet();
+	inboundShipment.selectParcel();
+	shippingMethod = "parcel";
    
+}
+
+
+@When("^On the contents tab pallet is selected$")
+public void on_the_contents_tab_pallet_is_selected()  {
+	InboundShipments inboundShipment = pageUnderTest.getInboundShipment();
+	inboundShipment.selectPallet();
+	shippingMethod = "pallet";
 }
 
 @When("^filled with details$")
 public void filled_with_details()  {
 	InboundShipments inboundShipment = pageUnderTest.getInboundShipment();
-	inboundShipment.contents();
+	inboundShipment.contents(shippingMethod);
     
 }
 
@@ -57,22 +67,26 @@ public void services_are_selected_on_services_tab()  {
 	inboundShipment.services();
 }
 
-@When("^On the shipping tab Ship via FedEx Ground is selected$")
-public void on_the_shipping_tab_Ship_via_FedEx_Ground_is_selected()  {
+@When("^On the shipping tab handle inbound shipping is selected as No$")
+public void on_the_shipping_tab_handle_inbound_shipping_is_selected_as_no() {
 	InboundShipments inboundShipment = pageUnderTest.getInboundShipment();
-	inboundShipment.shipping();
+	handleInboundShipping=false;
+	inboundShipment.shipping(handleInboundShipping,shippingMethod,"UPS");
+}
+
+@When("^On the shipping tab handle inbound shipping is selected as Yes$")
+public void on_the_shipping_tab_handle_inbound_shipping_is_selected_as_yes() {
+	InboundShipments inboundShipment = pageUnderTest.getInboundShipment();
+	handleInboundShipping=true;
+	inboundShipment.shipping(handleInboundShipping,shippingMethod,null);
+	
 }
 
 @Then("^User should be able to create ASN$")
 public void user_should_be_able_to_create_ASN() throws InterruptedException  {
 	InboundShipments inboundShipment = pageUnderTest.getInboundShipment();
 	inboundShipment.review();
-	Thread.sleep(3000);
-    
+	
 }
-
-
-	
-	
 
 }

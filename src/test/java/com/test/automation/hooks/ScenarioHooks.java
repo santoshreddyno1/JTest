@@ -29,7 +29,7 @@ public class ScenarioHooks {
 				scenario.embed(DriverService.takescreenShot(), "image/png");
 			}
 		}
-		
+		//System.out.println(scenario.getName());
 		DriverService.cleanUpDriver();
 	}
 

@@ -1,17 +1,20 @@
 package com.test.automation.stepdefs;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.test.automation.common.CSVFileUtil;
 import com.test.automation.common.DriverService;
 import com.test.automation.common.EnvironmentProperties;
 import com.test.automation.common.PageUnderTest;
 import com.test.automation.model.CharacteristicsDetails;
 import com.test.automation.model.FulfillmentDetails;
 import com.test.automation.model.InternationalDetails;
+import com.test.automation.model.NewProduct;
 import com.test.automation.model.ProductDetails;
 import com.test.automation.model.ReturnDetails;
 import com.test.automation.pageobjects.ChooseRetailer;
@@ -234,23 +237,29 @@ public class NewProductStepDefs {
 	
 	//*************
 	
-	@When("^pick any empty Item location and allocate it in the location$")
-	public void pick_any_empty_Item_location_and_allocate_it_in_the_location()  {
-		WmsHomepage wmsHomePage = pageUnderTest.getWmsHomepage();
-		wmsHomePage.ProductAllocation(pageUnderTest.getNewProductpage().getSku());
-	    
+	@When("^User fills all the details using data in \"([^\"]*)\" with record \"([^\"]*)\"$")
+	public void user_fills_all_the_details_using_data_in_with_record(String csvFileName, String testRecordId) throws InterruptedException  {
+		
+		Map<String,NewProduct> prodDetailsMap = CSVFileUtil.getNewProdData(csvFileName);
+		
+		NewProduct productTestDataRecord = prodDetailsMap.get(testRecordId);
+		if(productTestDataRecord!=null){
+			System.out.println(productTestDataRecord);
+		}else{
+			System.out.println("Can't find the record..");
+		}
+		
+		 NewProductPage newProductPage = pageUnderTest.getNewProductpage();
+			sku = newProductPage.detailsFill(productTestDataRecord);
+			newProductPage.characteristicsFill(productTestDataRecord);
+			newProductPage.fullfillmentFill(productTestDataRecord);
+			newProductPage.returnFill(productTestDataRecord);
+			newProductPage.internationalFill(productTestDataRecord);
+			Thread.sleep(3000);
+		    newProductPage.review();
+			pageUnderTest.setNewProductpage(newProductPage);
+			
 	}
-
-	@Then("^the user should be able to assign item to location successfully$")
-	public void the_user_should_be_able_to_assign_item_to_location_successfully()  {
-		WmsHomepage wmsHomePage = pageUnderTest.getWmsHomepage();
-		String sku = pageUnderTest.getNewProductpage().getSku();
-		boolean status = wmsHomePage.checkSKUAllocated(sku);
-		Assert.assertTrue("Allocation not successful for SKU "+sku, status);
-	
-	   
-	}
-	
 		
 		
 		

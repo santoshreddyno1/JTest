@@ -1,9 +1,9 @@
 package com.test.automation.model;
 
-public class FulfillmentDetails {
+public class FulfillmentDetails extends NewProduct{
 	
 	
-	private int lowStockThreshold;
+	/*private int lowStockThreshold;
 	private boolean isproductComeInMultipleVariations;
 	private String attribute1Type;
 	private String attribute1Value;
@@ -217,6 +217,7 @@ public class FulfillmentDetails {
 	public void setPalletWeight(float palletWeight) {
 		this.palletWeight = palletWeight;
 	}
+	*/
 	
 	
 	

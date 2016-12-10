@@ -1,8 +1,8 @@
 package com.test.automation.model;
 
-public class InternationalDetails {
+public class InternationalDetails extends NewProduct{
 	
-	private boolean internationalShipping;
+	/*private boolean internationalShipping;
 	private String countryOfOrigin ;
 	
 	public boolean isInternationalShipping() {
@@ -17,6 +17,6 @@ public class InternationalDetails {
 	public void setCountryOfOrigin(String countryOfOrigin) {
 		this.countryOfOrigin = countryOfOrigin;
 	}
-	
+	*/
 
 }

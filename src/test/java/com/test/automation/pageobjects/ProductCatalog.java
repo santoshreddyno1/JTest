@@ -11,21 +11,20 @@ public class ProductCatalog extends BasePage {
 	private static final By ADD_PRODUCT_BUTTON = By.linkText("Add Product");
 	private static final By ADD_COLLATERAL_BUTTON = By.linkText("Add Collateral");
 	
-	  
-
+	
 	public ProductCatalog(WebDriver webdriver) {
 		super(webdriver);
 	}
 
 	public NewProductPage clickOnNewProductButton() {
-        driver.findElement(NEW_PRODUCT_BUTTON).click();
-		driver.findElement(ADD_PRODUCT_BUTTON).click();
+		clickOnElement(NEW_PRODUCT_BUTTON);
+		clickOnElement(ADD_PRODUCT_BUTTON);
 		return new NewProductPage(driver);
 	}
 	
 	public CollateralCreationPage clickOnNewCollateralButton() {
-        driver.findElement(NEW_PRODUCT_BUTTON).click();
-		driver.findElement(ADD_COLLATERAL_BUTTON).click();
+		clickOnElement(NEW_PRODUCT_BUTTON);
+		clickOnElement(ADD_COLLATERAL_BUTTON);
 		return new CollateralCreationPage(driver);
 	}
 

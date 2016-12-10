@@ -32,7 +32,6 @@ public class CollateralCreationPage extends BasePage{
 	private static final By SUBMIT_BUTTON =By.linkText("Submit Collateral");
 	private static final By SAVE_CONFIRMATION_BUTTON =By.id("collateralSaveConfirmButton");
 	private static final By SKU_LABLE=By.xpath("//div[@id='collateral-details-page']//div[@class='qw-section'][1]//div[@class='qw-valuable collateral-name-val']");
-
 	private String colSKu;
 
 
@@ -43,6 +42,8 @@ public class CollateralCreationPage extends BasePage{
 	public void setColSKu(String colSKu) {
 		this.colSKu = colSKu;
 	}
+	
+	
 
 	public void collateralDetailsFill(CollateralDetails collateralDetails)
 	{
@@ -50,76 +51,57 @@ public class CollateralCreationPage extends BasePage{
 		String collateralSKU = collateralDetails.getCollateralSKU() + RandomDataUtil.getRandomNumber(7);
 		setColSKu(collateralSKU);
 
-		driver.findElement(COLLATERAL_SKU_TXT_FIELD).sendKeys(collateralSKU);
-		driver.findElement(COLLATERAL_DESC_TXT_FIELD).sendKeys(collateralDetails.getCollateralDesc());
-		driver.findElement(COLLATERAL_LDESC_TXT_FIELD).sendKeys(collateralDetails.getCollateralLongDesc());
-		driver.findElement(COLLATERAL_TYPE_DROPDOWN).click();
+		fillValue(COLLATERAL_SKU_TXT_FIELD, collateralSKU);
+		fillValue(COLLATERAL_DESC_TXT_FIELD, collateralDetails.getCollateralDesc());
+		fillValue(COLLATERAL_LDESC_TXT_FIELD, collateralDetails.getCollateralLongDesc());
+		clickOnElement(COLLATERAL_TYPE_DROPDOWN);
 		selectDropDownItemByText(collateralDetails.getCollateralType());
-		//driver.findElement(By.xpath("//li[text()='Gifts With Purchase']")).click();
 
 		if(collateralDetails.isIsbarcoded())
 		{
-
-			driver.findElement(COLLATERAL_IS_BARCODED_YES).click();
-		}else{
-			driver.findElement(COLLATERAL_IS_BARCODED_NO).click();
+			clickOnElement(COLLATERAL_IS_BARCODED_YES);
+		}
+		else
+		{
+			clickOnElement(COLLATERAL_IS_BARCODED_NO);
 		}
 
-		driver.findElement(COLLATERAL_UPC_TXT_FIELD).sendKeys(collateralDetails.getBarcode());
-		driver.findElement(COLLATERAL_LENGTH_TXT_FIELD).sendKeys(String.valueOf(collateralDetails.getCollateralLength()));
-		driver.findElement(COLLATERAL_WIDTH_TXT_FIELD).sendKeys(String.valueOf(collateralDetails.getCollateralWidth()));
-		driver.findElement(COLLATERAL_HEIGHT_TXT_FIELD).sendKeys(String.valueOf(collateralDetails.getCollateralHeight()));
-		driver.findElement(COLLATERAL_WEIGHT_TXT_FIELD).sendKeys(String.valueOf(collateralDetails.getCollateralWeight()));
+		fillValue(COLLATERAL_UPC_TXT_FIELD, collateralDetails.getBarcode());
+		fillValue(COLLATERAL_LENGTH_TXT_FIELD, String.valueOf(collateralDetails.getCollateralLength()));
+		fillValue(COLLATERAL_WIDTH_TXT_FIELD, String.valueOf(collateralDetails.getCollateralWidth()));
+		fillValue(COLLATERAL_HEIGHT_TXT_FIELD, String.valueOf(collateralDetails.getCollateralHeight()));
+		fillValue(COLLATERAL_WEIGHT_TXT_FIELD, String.valueOf(collateralDetails.getCollateralWeight()));
 
 		if(collateralDetails.isNotIncludeWithPrepackagedProducts())
 		{
-			driver.findElement(INCLUDE_INSERT_CHECK_BOX).click();
+			findElement(INCLUDE_INSERT_CHECK_BOX).click();
 		}
-		//Next Button
-		driver.findElement(NEXT_BUTTON).click();	
+		clickOnElement(NEXT_BUTTON);	
 
 	}
 
 	public void configureCollateralRules()
 	{
-		driver.findElement(NEXT_BUTTON).click();
+		clickOnElement(NEXT_BUTTON);
 	}
 
 	public void submitCollateralInfo()
 	{
-		driver.findElement(SUBMIT_BUTTON).click();
+		clickOnElement(SUBMIT_BUTTON);
+		clickOnElement(SAVE_CONFIRMATION_BUTTON);
 		waitForFiveSeconds();
-		driver.findElement(SAVE_CONFIRMATION_BUTTON).click();
-		waitForFiveSeconds();
 	}
-
-	@Override
-	public String getUrl() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public By getPageCheckLocator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getCollateralSKUInfo(){
-		waitForElement(ExpectedConditions.visibilityOfElementLocated(SKU_LABLE));
-		return findElement(SKU_LABLE).getText();
-	}
-
-
-
-
+	
+	
 
 	public void collateralDetailsFill()
 	{
 
 		String collateralSKU = "ATAC" + RandomDataUtil.getRandomNumber(7);
 		setColSKu(collateralSKU);
-
+		
+		
+		
 		driver.findElement(COLLATERAL_SKU_TXT_FIELD).sendKeys(collateralSKU);
 		driver.findElement(COLLATERAL_DESC_TXT_FIELD).sendKeys("description");
 		driver.findElement(COLLATERAL_LDESC_TXT_FIELD).sendKeys("lONG description");
@@ -142,6 +124,24 @@ public class CollateralCreationPage extends BasePage{
 
 	}
 
+
+
+	@Override
+	public String getUrl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public By getPageCheckLocator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getCollateralSKUInfo(){
+		waitForElement(ExpectedConditions.visibilityOfElementLocated(SKU_LABLE));
+		return findElement(SKU_LABLE).getText();
+	}
 
 
 }

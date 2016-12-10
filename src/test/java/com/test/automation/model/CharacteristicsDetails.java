@@ -1,7 +1,7 @@
 package com.test.automation.model;
 
-public class CharacteristicsDetails {
-	private boolean isHazadrous;
+public class CharacteristicsDetails extends NewProduct{
+	/*private boolean isHazadrous;
 	private boolean isMarkedWithBarcode;
 	private boolean isPerishable;
 	private int perishableDays;//re-check
@@ -88,6 +88,6 @@ public class CharacteristicsDetails {
 	}
 
 
-
+*/
 
 }

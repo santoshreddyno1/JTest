@@ -1,7 +1,7 @@
 package com.test.automation.model;
 
-public class ReturnDetails {
-	
+public class ReturnDetails extends NewProduct{
+	/*
 	private boolean isReturnable;
 	private int eligibleDays;
 	private String returnDestination;
@@ -54,7 +54,7 @@ public class ReturnDetails {
 		this.countryOfOrigin = countryOfOrigin;
 	}
 	
-	
+	*/
 	
 	
 	

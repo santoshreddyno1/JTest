@@ -17,20 +17,16 @@ public class HomePage extends BasePage {
 	}
 
 	public ProductCatalog clickOnProductCatalog() {
-		driver.findElement(PRODUCT_CATALOG_ICON).click();
+		clickOnElement(PRODUCT_CATALOG_ICON);
 		return new ProductCatalog(driver);
-
 	}
-	
 	
 	public InboundShipments selectInboundShipments()
 	{
 		clickOnElement(INBOUND_SHIPMENT_ICON);
-		return new InboundShipments(driver);
-			
+		return new InboundShipments(driver);	
 	}
 	
-
 	@Override
 	public By getPageCheckLocator() {
 		return PRODUCT_CATALOG_ICON;
@@ -39,10 +35,6 @@ public class HomePage extends BasePage {
 	@Override
 	public String getUrl() {
 		return null;
-		
-			//	"http://www.google.com";
-		
-		
 	}
 
 }

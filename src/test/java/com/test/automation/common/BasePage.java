@@ -133,7 +133,8 @@ public abstract class BasePage {
 	}
 	
 	protected void selectDropDownItemByText(String text){
-		String dropdownLocator = "//li[text()='" + text + "']";
+		//String dropdownLocator = "//li[text()='" + text + "']";
+		String dropdownLocator = "//li[contains(text(),'" + text + "')]";
 		findElement(By.xpath(dropdownLocator)).click();
 	}
 
